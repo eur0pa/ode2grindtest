@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .image-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #current-image {
+      width: 100%;
+      object-fit: contain; 
+      max-height: calc(100vh - 100px);
+    }
+
+    #alt-text {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .slideshow-container {
+      text-align: center;
+    }
+
+    .slideshow-image {
+      width: 100px; 
+      margin: 0 5px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+    .slideshow-image:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-container">
+    <img id="current-image" src="1.png" alt="ode setting 1.0">
+    <div id="alt-text"></div>
+  </div>
+  <div class="slideshow-container">
+    <img class="slideshow-image" src="1.png" alt="ode setting 1.0">
+    <img class="slideshow-image" src="2.png" alt="ode setting 2.0">
+    <img class="slideshow-image" src="3.png" alt="ode setting 3.0">
+    <img class="slideshow-image" src="4.png" alt="ode setting 4.0">
+    <img class="slideshow-image" src="5.png" alt="ode setting 5.0">
+    <img class="slideshow-image" src="6.png" alt="ode setting 6.0">
+    <img class="slideshow-image" src="7.png" alt="ode setting 7.0">
+    <img class="slideshow-image" src="8.png" alt="ode setting 8.0">
+    <img class="slideshow-image" src="9.png" alt="ode setting 9.0">
+    <img class="slideshow-image" src="10.png" alt="ode setting 10.0">
+    <img class="slideshow-image" src="11.png" alt="ode setting 11.0">
+  </div>
+  <script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.slideshow-image');
+
+    // Set initial image
+    document.getElementById('current-image').src = images[currentIndex].src;
+    document.getElementById('alt-text').textContent = images[currentIndex].alt;
+
+    // Add event listeners for arrow keys
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft') {
+        changeImage(-1);
+      } else if (event.key === 'ArrowRight') {
+        changeImage(1);
+      }
+    });
+
+    // Change image based on direction
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+      } else if (currentIndex >= images.length) {
+        currentIndex = 0;
+      }
+      document.getElementById('current-image').src = images[currentIndex].src;
+      document.getElementById('alt-text').textContent = images[currentIndex].alt;
+    }
+  </script>
+</body>
+</html>
+
